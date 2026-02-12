@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jagjoth Bhullar | RAJ Sports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0a1628;
+      --navy-light: #1a2d4a;
+      --gold: #c9a227;
+      --gold-light: #e8c547;
+      --cream: #f8f6f0;
+      --white: #ffffff;
+      --text-dark: #0a1628;
+      --text-muted: #5a6a7a;
+      --cyan: #00d4aa;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Utility */
+    .serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: difference;
+    }
+
+    nav.scrolled {
+      background: var(--navy);
+      mix-blend-mode: normal;
+      transition: background 0.3s;
+    }
+
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
+    }
+
+    /* Hero - Full Impact */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(201, 162, 39, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-image-wrapper {
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-image {
+      width: 320px;
+      height: 320px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+    }
+
+    .hero-values {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+      max-width: 320px;
+      text-align: center;
+    }
+
+    .hero-values span {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-tagline {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .hero-stat {
+      text-align: left;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-stat:hover {
+      transform: translateY(-4px);
+    }
+
+    .hero-stat:hover .hero-stat-value {
+      color: var(--cyan);
+    }
+
+    .hero-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.5rem;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Base */
+    section {
+      padding: 8rem 4rem;
+    }
+
+    .section-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Section Header */
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: end;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .section-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.875rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* Track Record Section */
+    .track-record {
+      background: var(--white);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      transition: background 0.3s;
+    }
+
+    .timeline-item:hover {
+      background: rgba(201, 162, 39, 0.03);
+      padding-left: 2rem;
+      margin-left: -2rem;
+      padding-right: 2rem;
+      margin-right: -2rem;
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .timeline-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Deals Grid */
+    .deals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .deal-card {
+      background: var(--cream);
+      padding: 2.5rem;
+      border-radius: 0;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+
+    .deal-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .deal-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .deal-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .deal-role {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Deals Table */
+    .deals-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .deals-table th {
+      text-align: left;
+      padding: 1rem 1.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--navy);
+    }
+
+    .deals-table td {
+      padding: 1.25rem 1.5rem;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      vertical-align: top;
+    }
+
+    .deals-table tr {
+      transition: background 0.2s;
+    }
+
+    .deals-table tbody tr:hover {
+      background: rgba(201, 162, 39, 0.05);
+    }
+
+    .deals-table td:first-child {
+      width: 180px;
+    }
+
+    .deals-table td:nth-child(2) {
+      width: 160px;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .deals-table td:last-child {
+      color: var(--text-muted);
+    }
+
+    /* Deal Links */
+    .deal-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      transition: all 0.2s;
+    }
+
+    .deal-link:hover {
+      color: var(--gold);
+      border-bottom-color: transparent;
+    }
+
+    .deal-card .deal-link {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .deal-card .deal-link:hover {
+      color: var(--gold);
+    }
+
+    /* Understanding Section - Dark */
+    .understanding {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .understanding .section-header h2 {
+      color: var(--white);
+    }
+
+    .understanding .section-header p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .portfolio-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 3rem;
+      transition: all 0.3s;
+    }
+
+    .portfolio-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--gold);
+    }
+
+    .portfolio-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--gold);
+    }
+
+    .portfolio-card p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .market-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .market-stat {
+      text-align: center;
+    }
+
+    .market-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--cyan);
+    }
+
+    .market-stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.75rem;
+    }
+
+    /* 90 Day Plan */
+    .plan-section {
+      background: var(--cream);
+    }
+
+    .plan-phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .phase {
+      padding: 3rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-right: none;
+      transition: all 0.3s;
+    }
+
+    .phase:last-child {
+      border-right: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .phase:hover {
+      background: var(--white);
+    }
+
+    .phase-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .phase-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .phase-period {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .phase ul {
+      list-style: none;
+    }
+
+    .phase li {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .phase li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    /* Vision Section */
+    .vision-section {
+      background: var(--white);
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .pillar {
+      padding: 3rem;
+      background: var(--cream);
+      transition: all 0.3s;
+    }
+
+    .pillar:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .pillar:hover h3 {
+      color: var(--gold);
+    }
+
+    .pillar:hover p {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .pillar-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pillar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      transition: color 0.3s;
+    }
+
+    .pillar p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      transition: color 0.3s;
+    }
+
+    /* Values Section */
+    .values-section {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .value-card {
+      padding: 3rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .value-card:last-child {
+      border-right: none;
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .value-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: var(--gold);
+    }
+
+    .value-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+
+    .values-quote {
+      text-align: center;
+      padding: 5rem 2rem 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .values-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.5;
+    }
+
+    /* Why Me */
+    .why-me {
+      background: var(--cream);
+    }
+
+    .differentiators {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2rem;
+    }
+
+    .diff {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .diff-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .diff h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .diff p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 10rem 4rem;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-section h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .cta-tagline {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+      margin: 0 auto 1rem;
+    }
+
+    .cta-emphasis {
+      color: var(--cyan);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .contact-item {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .contact-item strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      section {
+        padding: 4rem 2rem;
+      }
+
+      .hero {
+        padding: 6rem 2rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-main {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-image-wrapper {
+        order: -1;
+        margin-bottom: 2rem;
+      }
+
+      .hero-image {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+      }
+
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .deals-grid,
+      .portfolio-grid,
+      .plan-phases,
+      .pillars,
+      .needs-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .need-card {
+        border-right: none !important;
+      }
+
+      .phase {
+        border-right: 1px solid rgba(0,0,0,0.1);
+        border-bottom: none;
+      }
+
+      .phase:last-child {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+      }
+
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .value-card {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .differentiators {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .market-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .values-grid,
+      .differentiators,
+      .final-pitch-grid,
+      .values-row {
+        grid-template-columns: 1fr !important;
+      }
+
+      .final-pitch-grid > div {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .final-pitch-grid > div:last-child {
+        border-bottom: none;
+      }
+
+      .moodboard-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .moodboard-grid > div:first-child {
+        grid-row: span 1 !important;
+      }
+
+      .future-pillars {
+        grid-template-columns: 1fr !important;
+      }
+
+      .future-pillars > div {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+      }
+
+      .future-pillars > div:last-child {
+        border-bottom: none;
+      }
+
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .value-card {
+        border-right: none;
+      }
+
+      .contact-row {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .fit-rows > div {
+        grid-template-columns: 1fr !important;
+      }
+
+      .fit-rows > div > div:first-child {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+    }
+
+    /* Animations on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="logo">JB</div>
+    <ul>
+      <li><a href="#track-record">Track Record</a></li>
+      <li><a href="#understanding">The Fit</a></li>
+      <li><a href="#plan">90-Day Plan</a></li>
+      <li><a href="#vision">Vision</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-main">
+        <div class="hero-text">
+          <span class="hero-label">Counsel Candidate — RAJ Sports</span>
+          <h1>Jagjoth<br><em>Bhullar</em></h1>
+          <p class="hero-tagline">Counsel Candidate for RAJ Sports</p>
+        </div>
+        <div class="hero-image-wrapper">
+          <div class="hero-image">
+            <img src="profile.jpeg" alt="Jagjoth Bhullar">
+          </div>
+          <div class="hero-values">
+            <span>Work Ethic</span>
+            <span>Humility</span>
+            <span>Excellence</span>
+            <span>Innovation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <a href="https://www.nhl.com/sharks/news/sharks-sports-entertainment-and-city-of-san-jose-extend-sap-center-lease-agreement" target="_blank" class="hero-stat" style="text-decoration: none; cursor: pointer;">
+          <div class="hero-stat-value">$425M</div>
+          <div class="hero-stat-label">SAP Center Renovation ↗</div>
+        </a>
+        <a href="https://awfulannouncing.com/league-networks/pac-12-networks-legacy.html" target="_blank" class="hero-stat" style="text-decoration: none; cursor: pointer;">
+          <div class="hero-stat-value">$100M+</div>
+          <div class="hero-stat-label">Cable Portfolio (Annual) ↗</div>
+        </a>
+        <a href="https://news.asu.edu/20230802-university-news-asu-mountain-america-credit-union-naming-rights-deal-football-stadium" target="_blank" class="hero-stat" style="text-decoration: none; cursor: pointer;">
+          <div class="hero-stat-value">$50M+</div>
+          <div class="hero-stat-label">ASU Naming Rights ↗</div>
+        </a>
+        <a href="https://variety.com/2025/tv/news/fubo-sports-skinny-tv-bundle-price-espn-unlimited-1236499860/" target="_blank" class="hero-stat" style="text-decoration: none; cursor: pointer;">
+          <div class="hero-stat-value">Fubo Sports</div>
+          <div class="hero-stat-label">Skinny Bundle Launch ↗</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Track Record -->
+  <section class="track-record" id="track-record">
+    <div class="section-inner">
+      <div class="section-header">
+        <div>
+          <span class="section-number">01</span>
+          <h2>A Track Record<br>of Impact</h2>
+        </div>
+        <p>From conference-defining media deals to arena renovations, I have led complex sports transactions at every level.</p>
+      </div>
+
+      <!-- San Jose Sharks Deals -->
+      <div class="deals-table-container fade-in" style="margin-top: 4rem;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--navy);">San Jose Sharks</h3>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 2rem;">2025–Present · Deputy General Counsel</p>
+        <table class="deals-table">
+          <thead>
+            <tr>
+              <th>Partner</th>
+              <th>Deal Type</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fade-in">
+              <td><a href="https://www.nhl.com/sharks/news/sharks-sports-entertainment-and-city-of-san-jose-extend-sap-center-lease-agreement" target="_blank" class="deal-link"><strong>City of San Jose</strong> ↗</a></td>
+              <td>Venue / Lease</td>
+              <td>$425M SAP Center renovation and lease extension with City of San Jose</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://www.prnewswire.com/news-releases/fieldwork-named-the-official-non-alcoholic-craft-beer-of-the-san-jose-sharks-partnership-features-nhl-star-tyler-toffoli-302578320.html" target="_blank" class="deal-link"><strong>Fieldwork Brewing</strong> ↗</a></td>
+              <td>Sponsorship</td>
+              <td>Official Non-Alcoholic Craft Beer partner; partnership features NHL star Tyler Toffoli</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://sharkshockeydigest.com/san-jose-sharks-heritage-jersey-alumni-nights/" target="_blank" class="deal-link"><strong>Heritage Jersey / Alumni</strong> ↗</a></td>
+              <td>Brand / IP</td>
+              <td>Heritage jersey program and Alumni Nights activation</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://www.nhl.com/news/nhl-nhlpa-agree-on-4-year-extension-to-cba" target="_blank" class="deal-link"><strong>NHL / NHLPA CBA</strong> ↗</a></td>
+              <td>Labor / Compliance</td>
+              <td>Internal expert on newly executed CBA and built playbook to ensure compliance</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FuboTV Deals -->
+      <div class="deals-table-container fade-in" style="margin-top: 4rem;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--navy);">FuboTV</h3>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 2rem;">2024–2025 · Director of Legal & Business Affairs</p>
+        <table class="deals-table">
+          <thead>
+            <tr>
+              <th>Partner</th>
+              <th>Deal Type</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fade-in">
+              <td><a href="https://finance.yahoo.com/news/fubo-retains-exclusive-rights-premier-130000847.html" target="_blank" class="deal-link"><strong>Premier League</strong> ↗</a></td>
+              <td>Sports Rights</td>
+              <td>Retained exclusive streaming rights for premier soccer content</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://www.nasdaq.com/press-release/fubo-brings-live-european-league-football-fubo-sports-fast-network-multi-year" target="_blank" class="deal-link"><strong>European League Football</strong> ↗</a></td>
+              <td>Sports Rights</td>
+              <td>Multi-year deal bringing live ELF to Fubo Sports FAST network</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://www.sportsvideo.org/2025/06/06/fubo-expands-live-sports-streaming-options-with-ppv/" target="_blank" class="deal-link"><strong>PPV Expansion</strong> ↗</a></td>
+              <td>Platform Development</td>
+              <td>Expanded live sports streaming options with pay-per-view offerings</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://cordcuttersnews.com/fubo-adds-cricket-bundle-in-canada-ahead-of-icc-womens-world-cup/" target="_blank" class="deal-link"><strong>ICC Women's World Cup</strong> ↗</a></td>
+              <td>Sports Rights</td>
+              <td>Added cricket bundle in Canada ahead of ICC Women's World Cup</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pac-12 Conference Deals -->
+      <div class="deals-table-container fade-in" style="margin-top: 4rem;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--navy);">Pac-12 Conference</h3>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 2rem;">2019–2024 · Associate Counsel → Counsel → Senior Counsel</p>
+        <table class="deals-table">
+          <thead>
+            <tr>
+              <th>Partner</th>
+              <th>Deal Type</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fade-in">
+              <td><a href="https://pac-12.com/article/2024/05/14/pac-12-football-be-featured-nationally-across-cw-network-fox-sports-2024" target="_blank" class="deal-link"><strong>CW / Fox</strong> ↗</a></td>
+              <td>Media Rights</td>
+              <td>Drafted and negotiated new media rights package for conference transition</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://www.espn.com/college-football/story/_/id/35157289/pac-12-agrees-hold-title-game-las-vegas-2023" target="_blank" class="deal-link"><strong>Allegiant Stadium</strong> ↗</a></td>
+              <td>Venue Agreement</td>
+              <td>Brought Pac-12 Football Championship to Las Vegas; negotiated with Raiders, MGM, Resorts World</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://www.sportsbusinessjournal.com/Daily/Issues/2022/12/01/Technology/tempus-ex-machina-pac-12-injury-spotters-additional-real-time-video-data-access.aspx" target="_blank" class="deal-link"><strong>Tempus Ex</strong> ↗</a></td>
+              <td>Data Rights</td>
+              <td>First-of-kind exclusive data tracking partnership across all Pac-12 sports; AAV in millions</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://pac-12.com/article/2023/01/17/pac-12-curastory-and-tempus-ex-machina-partner-empower-pac-12-student-athletes" target="_blank" class="deal-link"><strong>Curastory</strong> ↗</a> / <a href="https://sports.yahoo.com/steve-cohen-leads-investment-recur-140038099.html" target="_blank" class="deal-link"><strong>Recur</strong> ↗</a></td>
+              <td>NIL Platform</td>
+              <td>First Power 5 conference to provide NIL monetization to student athletes</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://www.sportsvideo.org/2021/09/01/pac-12-networks-veritone-develop-new-nil-licensing-program/" target="_blank" class="deal-link"><strong>Veritone</strong> ↗</a></td>
+              <td>Content Licensing</td>
+              <td>Exclusive licensor enabling productions like <a href="https://www.si.com/college/colorado/buffs-social/deion-sanders-amazon-prime-series-being-shot-on-colorado-campus" target="_blank" class="deal-link">"Coach Prime" on Amazon ↗</a></td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://arizonasports.com/story/3150931/bracket-set-for-inaugural-pac-12-baseball-tournament-in-scottsdale/" target="_blank" class="deal-link"><strong>Scottsdale Stadium</strong> ↗</a></td>
+              <td>Venue Agreement</td>
+              <td>Created first-ever Pac-12 Baseball Tournament; negotiated with City of Scottsdale</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://awfulannouncing.com/league-networks/pac-12-networks-legacy.html" target="_blank" class="deal-link"><strong>Comcast / Charter / Cox / Dish</strong> ↗</a></td>
+              <td>Cable Carriage</td>
+              <td>Lead lawyer on portfolio of long-form carriage agreements; $100M+ annual revenue</td>
+            </tr>
+            <tr class="fade-in">
+              <td><a href="https://apnews.com/article/college-football-sports-sports-business-arizona-tomas-95ecd282c7874d2ab7c41a55a6c57dc2" target="_blank" class="deal-link"><strong>Nextiva</strong> ↗</a></td>
+              <td>Conference Sponsorship</td>
+              <td>Official Communications Partner; digital, social, broadcast & signage assets</td>
+            </tr>
+            <tr class="fade-in">
+              <td><strong>Roku / Samsung / Vizio</strong></td>
+              <td>AVOD Distribution</td>
+              <td>Launched Pac-12 Insider product on leading AVOD platforms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- The Fit -->
+  <section class="understanding" id="understanding">
+    <div class="section-inner">
+      <div class="section-header">
+        <div>
+          <span class="section-number">02</span>
+          <h2>The Fit</h2>
+        </div>
+        <p>What you need—and the experience I bring.</p>
+      </div>
+
+      <!-- Side-by-Side Rows -->
+      <div class="fit-rows fade-in">
+
+        <!-- Row 1: Sponsorship -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(255,255,255,0.1); border-bottom: none;">
+          <div style="padding: 2.5rem; border-right: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;">You Need</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">Sponsorship & Commercial Deals</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6;">"Draft, review, and negotiate sponsorship agreements, naming rights, and media partnerships"</p>
+          </div>
+          <div style="padding: 2.5rem; background: rgba(255,255,255,0.02);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">I Bring</div>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.7;">A deep expertise in drafting and negotiating sports agreements of all kinds, including sponsorship, venue, naming rights, vendor, and talent agreements.</p>
+          </div>
+        </div>
+
+        <!-- Row 2: CBA -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(255,255,255,0.1); border-bottom: none;">
+          <div style="padding: 2.5rem; border-right: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;">You Need</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">Player Contracts & CBA</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6;">"Navigate NWSL and WNBA CBAs, handle player signings, trades, and league compliance"</p>
+          </div>
+          <div style="padding: 2.5rem; background: rgba(255,255,255,0.02);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">I Bring</div>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.7;">Helped Sharks hockey operations staff navigate newly executed NHL CBA & built internal compliance playbook. Led the launch of the first NIL Licensing portal in the Power 5, and successfully interpreted evolving NCAA guidance. Performed Title IX audits across Pac-12 athletic departments.</p>
+          </div>
+        </div>
+
+        <!-- Row 3: Venue -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(255,255,255,0.1); border-bottom: none;">
+          <div style="padding: 2.5rem; border-right: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;">You Need</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">Venue & Real Estate</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6;">"Support $150M training facility, manage Providence Park arrangements, construction agreements"</p>
+          </div>
+          <div style="padding: 2.5rem; background: rgba(255,255,255,0.02);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">I Bring</div>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.7;">A diverse and varied experience negotiating and managing venue agreements. At the Pac-12 I directly led negotiations with Allegiant Stadium, Scottsdale Stadium and T-Mobile Arena to host our annual championship agreements. At the Sharks, we operate SAP Center, TechCU Arena, and Sharks Ice. I manage our insurance, vendor agreements, and lease renewals for these facilities.</p>
+          </div>
+        </div>
+
+        <!-- Row 4: Employment -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(255,255,255,0.1); border-bottom: none;">
+          <div style="padding: 2.5rem; border-right: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;">You Need</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">Employment & Risk</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6;">"HR compliance, employment matters, build culture of accountability"</p>
+          </div>
+          <div style="padding: 2.5rem; background: rgba(255,255,255,0.02);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">I Bring</div>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.7;">Experience managing prolonged public disputes, having dealt with NCAA anti-trust litigations and carriage disputes with major distributors. I have built a network of excellent outside counsel and advisors to lean on when needed. At the Sharks, HR reports directly to legal, and I have managed numerous employment disputes, investigations and compliance trainings.</p>
+          </div>
+        </div>
+
+        <!-- Row 5: Culture -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(255,255,255,0.1); border-bottom: none;">
+          <div style="padding: 2.5rem; border-right: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;">You Need</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">Culture & Values</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6;">"Check ego at the door, work ethic, humility, excellence"</p>
+          </div>
+          <div style="padding: 2.5rem; background: rgba(255,255,255,0.02);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">I Bring</div>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.7;">Four core values: a work ethic driven approach, humility to understand what I know and what I need to lean on others for, a drive towards excellence and maintaining high standards, and an innovator's mindset.</p>
+          </div>
+        </div>
+
+        <!-- Row 6: Innovation -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="padding: 2.5rem; border-right: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem;">You Need</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem;">Efficiency & Innovation</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6;">"Lean legal function, creative problem-solving, scale with portfolio growth"</p>
+          </div>
+          <div style="padding: 2.5rem; background: rgba(255,255,255,0.02);">
+            <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">I Bring</div>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.7;">BS in Computer Engineering. Built AI tools for contract analysis. First-of-kind data partnerships. I think in systems.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 90-Day Plan -->
+  <section class="plan-section" id="plan">
+    <div class="section-inner">
+      <div class="section-header">
+        <div>
+          <span class="section-number">03</span>
+          <h2>The First<br>90 Days</h2>
+        </div>
+        <p>A structured approach to building the legal foundation RAJ Sports needs—head down, earning trust through results.</p>
+      </div>
+
+      <div class="plan-phases">
+        <div class="phase fade-in">
+          <div class="phase-number">01</div>
+          <div class="phase-title">Listen & Learn</div>
+          <div class="phase-period">Days 1–30</div>
+          <ul>
+            <li>Audit all existing contracts across both franchises</li>
+            <li>Map compliance posture and risk areas</li>
+            <li>Build relationships with leadership, HR, operations</li>
+            <li>Understand Bhathal family priorities and risk tolerance</li>
+          </ul>
+        </div>
+        <div class="phase fade-in">
+          <div class="phase-number">02</div>
+          <div class="phase-title">Assess & Prioritize</div>
+          <div class="phase-period">Days 31–60</div>
+          <ul>
+            <li>Identify contract gaps, renewal opportunities</li>
+            <li>Develop legal playbook for WNBA expansion</li>
+            <li>Review Thorns sponsorship pipeline</li>
+            <li>Establish outside counsel relationships</li>
+          </ul>
+        </div>
+        <div class="phase fade-in">
+          <div class="phase-number">03</div>
+          <div class="phase-title">Build & Execute</div>
+          <div class="phase-period">Days 61–90</div>
+          <ul>
+            <li>Implement contract management system</li>
+            <li>Draft standard templates for all deal types</li>
+            <li>Create compliance training (CBA, employment)</li>
+            <li>Present strategic roadmap to ownership</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Moodboard -->
+  <section class="vision-moodboard" id="vision" style="background: var(--cream); padding: 8rem 4rem;">
+    <div class="section-inner">
+      <div class="section-header" style="text-align: center; display: block; margin-bottom: 5rem;">
+        <span class="section-number" style="text-align: center; display: block;">04</span>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem);">The <em style="font-style: italic; color: var(--gold);">Vision</em></h2>
+        <p style="color: var(--text-muted); font-size: 1.125rem; max-width: 600px; margin: 1.5rem auto 0;">Cementing Portland as the global epicenter of women's sports.</p>
+      </div>
+
+      <!-- Moodboard Grid -->
+      <div class="moodboard-grid fade-in" style="display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 1.5rem; margin-bottom: 4rem;">
+
+        <!-- Main Vision Card -->
+        <div style="grid-row: span 2; background: var(--navy); padding: 3rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;">The Opportunity</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--white); line-height: 1.2; margin-bottom: 1.5rem;">Two Franchises.<br>One City.<br>Unlimited Potential.</h3>
+            <p style="color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.8;">RAJ Sports is the only ownership group in the U.S. with two professional women's teams. The Thorns and Fire share a $150M performance center, brand equity, and a fanbase that's already broken records—10,000+ season ticket deposits before tipoff.</p>
+          </div>
+          <div style="display: flex; gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <div>
+              <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan);">2</div>
+              <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em;">Franchises</div>
+            </div>
+            <div>
+              <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan);">2</div>
+              <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em;">Leagues</div>
+            </div>
+            <div>
+              <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan);">1</div>
+              <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em;">Vision</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thorns Card -->
+        <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2rem; position: relative; overflow: hidden;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">NWSL</div>
+          <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem;">Portland Thorns</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">Ring deal: largest kit sponsorship in NWSL history. Led attendance 8 seasons.</p>
+          <div style="position: absolute; bottom: -20px; right: -20px; font-family: 'Playfair Display', serif; font-size: 6rem; color: rgba(255,255,255,0.03);">FC</div>
+        </div>
+
+        <!-- Fire Card -->
+        <div style="background: linear-gradient(135deg, #2d132c 0%, #801336 100%); padding: 2rem; position: relative; overflow: hidden;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">WNBA · 2026</div>
+          <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem;">Portland Fire</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">$125M expansion. Enters during new $200M/yr media deal era.</p>
+          <div style="position: absolute; bottom: -20px; right: -20px; font-family: 'Playfair Display', serif; font-size: 6rem; color: rgba(255,255,255,0.03);">26</div>
+        </div>
+
+        <!-- Market Moment -->
+        <div style="background: var(--white); padding: 2rem; border: 1px solid rgba(0,0,0,0.08);">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Market</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--navy); line-height: 1;">$3.5B</div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">WNBA team valuations—up 100%+ in 12 months</p>
+        </div>
+
+        <!-- Growth -->
+        <div style="background: var(--white); padding: 2rem; border: 1px solid rgba(0,0,0,0.08);">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Viewership</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--navy); line-height: 1;">430%</div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">370M viewer hours in 2024 vs 2021</p>
+        </div>
+      </div>
+
+      <!-- Additional Stats Row -->
+      <div class="stats-row fade-in" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 4rem;">
+        <div style="background: var(--navy); padding: 1.5rem; text-align: center;">
+          <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan);">$2.35B</div>
+          <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">2025 women's sports revenue</p>
+        </div>
+        <div style="background: var(--navy); padding: 1.5rem; text-align: center;">
+          <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan);">4x</div>
+          <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">NWSL sponsorship growth in 5 years</p>
+        </div>
+        <div style="background: var(--navy); padding: 1.5rem; text-align: center;">
+          <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan);">48%</div>
+          <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">WNBA attendance increase YoY</p>
+        </div>
+        <div style="background: var(--navy); padding: 1.5rem; text-align: center;">
+          <div style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--cyan);">8</div>
+          <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Seasons Thorns led NWSL attendance</p>
+        </div>
+      </div>
+
+      <!-- Future Opportunities Header -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;">What's Next</div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--navy);">Growth Opportunities</h3>
+      </div>
+
+      <!-- Future Pillars -->
+      <div class="future-pillars fade-in" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+        <div style="padding: 2rem; border-right: 1px solid rgba(0,0,0,0.1); text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Cross-Property Deals</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Bundle Thorns + Fire sponsorships. Category exclusivity across NWSL and WNBA. Unique in the market.</p>
+        </div>
+        <div style="padding: 2rem; border-right: 1px solid rgba(0,0,0,0.1); text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Media & Content</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Original content production. Documentary opportunities. Leverage $200M/yr WNBA media deal starting 2026.</p>
+        </div>
+        <div style="padding: 2rem; border-right: 1px solid rgba(0,0,0,0.1); text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Real Estate</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Sports-anchored development (Bhathal playbook from Sacramento). Training facility as community hub.</p>
+        </div>
+        <div style="padding: 2rem; text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Portfolio Expansion</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Additional women's leagues (PWHL, volleyball). International friendlies. Youth academies as talent pipeline.</p>
+        </div>
+      </div>
+
+      <!-- Second Row of Opportunities -->
+      <div class="future-pillars fade-in" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(0,0,0,0.1); border-top: none;">
+        <div style="padding: 2rem; border-right: 1px solid rgba(0,0,0,0.1); text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Global Fanbase</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">International players = international markets. Pre-season tours. Streaming rights beyond U.S.</p>
+        </div>
+        <div style="padding: 2rem; border-right: 1px solid rgba(0,0,0,0.1); text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Merchandise</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Women's sports merchandise up 3x. Shared retail operations. Direct-to-consumer play.</p>
+        </div>
+        <div style="padding: 2rem; border-right: 1px solid rgba(0,0,0,0.1); text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Player Marketing</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">NIL-era athletes as brands. Joint marketing with players. Social media reach in millions.</p>
+        </div>
+        <div style="padding: 2rem; text-align: center;">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">Culture Leader</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Set the standard for women's sports ownership. Player-first. Accountability-driven. The blueprint.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-inner">
+      <h2><em>Jagjoth Bhullar</em></h2>
+      <div class="contact-row" style="border-top: none; padding-top: 2rem;">
+        <div class="contact-item">jagjothbhullar@gmail.com</div>
+        <div class="contact-item">408-896-6014</div>
+        <div class="contact-item"><a href="https://apps.calbar.ca.gov/attorney/Licensee/Detail/328782" target="_blank" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--gold);">CA Bar #328782</a></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Navigation background on scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Fade in on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Keyboard navigation
+    const sections = document.querySelectorAll('section');
+    document.addEventListener('keydown', (e) => {
+      const currentIndex = [...sections].findIndex(section => {
+        const rect = section.getBoundingClientRect();
+        return rect.top >= -100 && rect.top <= window.innerHeight / 2;
+      });
+
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        if (currentIndex < sections.length - 1) {
+          sections[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        if (currentIndex > 0) {
+          sections[currentIndex - 1].scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+
+  </script>
+</body>
+</html>
